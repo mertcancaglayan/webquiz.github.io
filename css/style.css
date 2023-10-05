@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("/images/background.png");
+    background-size: cover;
+}
+
+.main {
+    background: rgb(187,76,6);
+    background: linear-gradient(90deg, rgba(187,76,6,1) 0%, rgba(255,179,0,1) 97%);
+    width: 85%;
+    max-width: 800px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.main h1{
+    font-size: 35px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.quiz {
+    padding: 10px 0;
+}
+
+.quiz h2 {
+    font-size: 25;
+    font-weight: 600;
+}
+
+#answers-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+#answers-buttons li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+}
+
+
+.btn {
+    background-color: white;
+    font-weight: 500;
+    border: 1px solid ;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    border-radius: 10px;
+    transition: all 0.3s;
+    font-size: larger;
+}
+
+.btn:hover {
+    background-color: rgba(0, 0, 0, 0.411);
+    color: aliceblue;
+}
+
+
+
+.targetButton {
+    background-color: #FF5403;
+    color: aliceblue;
+    padding: 10px;
+    margin: 15px auto 0;
+    max-width: 350px;
+    width: 30%;
+    border: 0px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: none;
+    transition: all 0.4s;
+}
+
+.targetButton:hover {
+    background-color: #FFCA03;
+    color: black;
+}
+
+#score {
+    display: flex;
+    justify-content: center;
+    margin: 7px 10px 0;
+}
+
+.restart-btn {
+    background-color: #FF5403;
+    padding: 15px;
+    color: aliceblue;
+    border: 0px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.restart-btn:hover {
+    color: black;
+    background-color: #FFCA03;
+}
+
+
+.shake {
+    animation: shake 0.7s;
+    border: red 3px solid;
+    animation-iteration-count: 5;
+
+}
+
+.greyBackground {
+    background-color: grey;
+}
+
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
