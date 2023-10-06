@@ -11,24 +11,28 @@
 <body>
     <div class="main" >
         <h1>Math Quiz</h1>
+        <button id="backToMainPage" class="targetButtons"><i class="fa-solid fa-house fa-2xl"></i></button>
         <h2 id="score"></h2>
         <div class="quiz">
-            <h2 id="question">Choose Category</h2>
             <div id="quiz-slider">
+                <h2 id="question">Choose Category</h2>
                 <ol id="answers-buttons">
                     <li><button class="btn" id="basic">Basic Math Questions</button></li>
                     <li><button class="btn" id="linear">Linear Equations</button></li>
                     <li><button class="btn" id="puzzle">Puzzle Questions</button></li>
                     <li><button class="btn" id="sequence">Sequence Questions</button></li>
                     <li><button class="btn" id="simultaneous">Simultaneous Equations</button></li>
-                </ol>                        
-            </div>
+                </ol>
+                <ol id="answers-buttons-next">
+
+                </ol>                             
+            </div>          
+        </div>
+        <div class="target-btn-container">
             <button id="mainPage" class="targetButton">Main Page</button>
             <button id="previousQuestion" class="targetButton">Previous Question</button>
             <button id="nextQuestion" class="targetButton">Next Question</button>
             <button id="endQuiz" class="targetButton">End Quiz</button>
-
-            
         </div>
     </div>
     

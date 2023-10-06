@@ -37,6 +37,8 @@ body {
     font-weight: 600;
 }
 
+
+
 #answers-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -73,6 +75,22 @@ body {
     color: aliceblue;
 }
 
+#backToMainPage {
+    background-color: transparent;
+    border: none;
+    color: aliceblue;
+    margin: 10px 0 0 auto;
+    cursor: pointer;
+}
+
+#backToMainPage:hover {
+    color: #FFCA03;
+}
+
+
+.target-btn-container {
+    display: flex;
+}
 
 
 .targetButton {

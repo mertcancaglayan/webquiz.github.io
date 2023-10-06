@@ -4,7 +4,6 @@ import linearEquations from "./db/linearequations.js";
 import puzzleQuestions from "./db/puzzlequestions.js";
 import simultaneousEquations from "./db/simultaneousequations.js";
 
-
 const basicButton = document.getElementById("basic");
 const linearButton = document.getElementById("linear");
 const puzzleButton = document.getElementById("puzzle");
@@ -17,6 +16,11 @@ const scoreElement = document.getElementById("score");
 const nextBtnElement = document.getElementById("nextQuestion");
 const previousBtnElement = document.getElementById("previousQuestion");
 const endQuizElement = document.getElementById("endQuiz");
+const backToMainPageElement = document.getElementById("backToMainPage");
+
+backToMainPageElement.addEventListener("click", () => {
+	location.reload();
+});
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -24,146 +28,152 @@ let currentQuestionSet = [];
 const selectedAnswers = {};
 
 function startQuiz(Questions) {
-    currentQuestionSet = Questions;
-    currentQuestionIndex = 0;
-    score = 0;
-    showNextQuestion();
+	currentQuestionSet = Questions;
+	currentQuestionIndex = 0;
+	score = 0;
+	showNextQuestion();
 }
 
 function showNextQuestion() {
-    if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuestionSet.length) {
-        let currentQuestion = currentQuestionSet[currentQuestionIndex];
-        let questionNo = currentQuestionIndex + 1;
+	if (
+		currentQuestionIndex >= 0 &&
+		currentQuestionIndex < currentQuestionSet.length
+	) {
+		let currentQuestion = currentQuestionSet[currentQuestionIndex];
+		let questionNo = currentQuestionIndex + 1;
 
-        questionElement.innerText = `Question(${questionNo}) ${currentQuestion.question}`;
-        scoreElement.innerHTML = `Score: ${score}/${currentQuestionSet.length}`;
+		questionElement.innerText = `Question(${questionNo}) ${currentQuestion.question}`;
+		scoreElement.innerHTML = `Score: ${score}/${currentQuestionSet.length}`;
 
-        answerButtonElement.innerHTML = "";
-        nextBtnElement.style.display = "inline";
-        previousBtnElement.style.display = "inline";
+		answerButtonElement.innerHTML = "";
+		nextBtnElement.style.display = "inline";
+		previousBtnElement.style.display = "inline";
 
-        currentQuestion.answers.forEach((answer) => {
-            const liElement = document.createElement("li");
-            const buttonElement = document.createElement("button");
-            buttonElement.className = "btn";
-            buttonElement.setAttribute("data-correct", answer.correct);
-            buttonElement.setAttribute("data-answer", answer.text);
+		currentQuestion.answers.forEach((answer) => {
+			const liElement = document.createElement("li");
+			const buttonElement = document.createElement("button");
+			buttonElement.className = "btn";
+			buttonElement.setAttribute("data-correct", answer.correct);
+			buttonElement.setAttribute("data-answer", answer.text);
 
-            buttonElement.innerText = answer.text;
+			buttonElement.innerText = answer.text;
 
-            if (selectedAnswers[questionNo] && selectedAnswers[questionNo].text === answer.text) {
-                buttonElement.classList.add("greyBackground");
-                buttonElement.disabled = true;
-            }
+			if (
+				selectedAnswers[questionNo] &&
+				selectedAnswers[questionNo].text === answer.text
+			) {
+				buttonElement.classList.add("greyBackground");
+				buttonElement.disabled = true;
+			}
 
-            liElement.appendChild(buttonElement);
-            answerButtonElement.appendChild(liElement);
+			liElement.appendChild(buttonElement);
+			answerButtonElement.appendChild(liElement);
 
-            buttonElement.addEventListener("click", () => {
-                if (!selectedAnswers[questionNo]) {
-                    selectedAnswers[questionNo] = answer;
-                    checkAnswers(answer.correct);
-                    buttonElement.classList.add("greyBackground");
-                    buttonElement.disabled = true;
-                    setTimeout(1500);
-                }
-            });
-        });
-    } else {
-        nextBtnElement.style.display = "none";
-        previousBtnElement.style.display = "inline";
-        endQuizElement.style.display = "inline";
-        endQuizElement.style.marginRight = 0;
-        endQuizElement.addEventListener("click", () => {
-            endQuiz();
-        });
-    }
+			buttonElement.addEventListener("click", () => {
+				if (!selectedAnswers[questionNo]) {
+					selectedAnswers[questionNo] = answer;
+					checkAnswers(answer.correct);
+					buttonElement.classList.add("greyBackground");
+					buttonElement.disabled = true;
+					setTimeout(1500);
+				}
+			});
+		});
+	} else {
+		nextBtnElement.style.display = "none";
+		previousBtnElement.style.display = "inline";
+		endQuizElement.style.display = "inline";
+		endQuizElement.style.marginRight = 0;
+		endQuizElement.addEventListener("click", () => {
+			endQuiz();
+		});
+	}
 }
 
 function showPreviousQuestion() {
-    if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        showNextQuestion();
-    }
+	if (currentQuestionIndex > 0) {
+		currentQuestionIndex--;
+		showNextQuestion();
+	}
 }
 
 previousBtnElement.addEventListener("click", () => {
-    showPreviousQuestion();
+	showPreviousQuestion();
 });
 
 nextBtnElement.addEventListener("click", () => {
-    currentQuestionIndex++;
-    showNextQuestion();
+	currentQuestionIndex++;
+	showNextQuestion();
 });
 
 function checkAnswers(isCorrect) {
-    const buttonElements = answerButtonElement.querySelectorAll("button");
+	const buttonElements = answerButtonElement.querySelectorAll("button");
 
-    buttonElements.forEach(button => {
-        button.disabled = true;
-        const isButtonCorrect = button.getAttribute("data-correct") === "true";
+	buttonElements.forEach((button) => {
+		button.disabled = true;
+		const isButtonCorrect = button.getAttribute("data-correct") === "true";
 
-        if (isButtonCorrect) {
-            button.classList.remove("greyBackground");
-            button.style.backgroundColor = "green";
-            button.style.color = "white";
-        } else {
-            button.classList.add('shake');
-        }
-    });
+		if (isButtonCorrect) {
+			button.classList.remove("greyBackground");
+			button.style.backgroundColor = "green";
+			button.style.color = "white";
+		} else {
+			button.classList.add("shake");
+		}
+	});
 
-    if (isCorrect) {
-        score++;
-    }
+	if (isCorrect) {
+		score++;
+	}
 }
 
 function endQuiz() {
-    scoreElement.innerHTML = `<span>Quiz ended. Your score: ${score}/${currentQuestionSet.length}</span>  <button class="restart-btn">Restart</button>`;
-    scoreElement.style.justifyContent = "space-between";
-    answerButtonElement.innerHTML = "";
-    questionElement.innerText = "";
-    previousBtnElement.style.display = "none";
+	scoreElement.innerHTML = `<span>Quiz ended. Your score: ${score}/${currentQuestionSet.length}</span>  
+	<button class="restart-btn">Restart</button>`;
+	scoreElement.style.justifyContent = "space-between";
+	answerButtonElement.innerHTML = "";
+	questionElement.innerText = "";
+	previousBtnElement.style.display = "none";
 
-    const mainPageButtonElement = document.getElementById("mainPage");
-    mainPageButtonElement.style.display = "block";
-    mainPageButtonElement.addEventListener("click", () => {
-        location.reload();
-    });
+	const mainPageButtonElement = document.getElementById("mainPage");
+	mainPageButtonElement.style.display = "block";
+	mainPageButtonElement.addEventListener("click", () => {
+		location.reload();
+	});
 
-    const restartButtonElement = document.querySelector(".restart-btn");
+	const restartButtonElement = document.querySelector(".restart-btn");
 
-    restartButtonElement.addEventListener("click", () => {
-        scoreElement.innerHTML = "";
-        mainPageButtonElement.style.display = "none";
-        scoreElement.style.justifyContent = "center";
-        startQuiz(currentQuestionSet);
-    });
+	restartButtonElement.addEventListener("click", () => {
+		scoreElement.innerHTML = "";
+		mainPageButtonElement.style.display = "none";
+		scoreElement.style.justifyContent = "center";
+		startQuiz(currentQuestionSet);
+	});
 
-    endQuizElement.style.display = "none";
+	endQuizElement.style.display = "none";
 }
 
-
 basicButton.addEventListener("click", () => {
-    startQuiz(basicQuestions);
+	startQuiz(basicQuestions);
 });
 linearButton.addEventListener("click", () => {
-    startQuiz(linearEquations);
+	startQuiz(linearEquations);
 });
 puzzleButton.addEventListener("click", () => {
-    startQuiz(puzzleQuestions);
+	startQuiz(puzzleQuestions);
 });
 sequenceButton.addEventListener("click", () => {
-    startQuiz(sequenceList);
+	startQuiz(sequenceList);
 });
 simultaneousButton.addEventListener("click", () => {
-    startQuiz(simultaneousEquations);
+	startQuiz(simultaneousEquations);
 });
 
-const shakeBtn = document.getElementById('shake-btn');
-shakeBtn.addEventListener('click', function () {
-    if (shakeBtn.classList.contains('shake')) {
-        shakeBtn.classList.remove('shake');
-    } else {
-        shakeBtn.classList.add('shake');
-    }
+const shakeBtn = document.getElementById("shake-btn");
+shakeBtn.addEventListener("click", function () {
+	if (shakeBtn.classList.contains("shake")) {
+		shakeBtn.classList.remove("shake");
+	} else {
+		shakeBtn.classList.add("shake");
+	}
 });
