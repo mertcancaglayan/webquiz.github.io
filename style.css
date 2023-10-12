@@ -37,6 +37,8 @@ body {
     font-weight: 600;
 }
 
+
+
 #answers-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -54,7 +56,6 @@ body {
     width: 45%;
 }
 
-
 .btn {
     background-color: white;
     font-weight: 500;
@@ -62,10 +63,12 @@ body {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    text-align: center;
+    text-align:center;
+    overflow-wrap: break-word;
     border-radius: 10px;
     transition: all 0.3s;
-    font-size: larger;
+    font-size: large;
+    animation: growup .40s;
 }
 
 .btn:hover {
@@ -73,6 +76,22 @@ body {
     color: aliceblue;
 }
 
+#backToMainPage {
+    background-color: transparent;
+    border: none;
+    color: aliceblue;
+    margin: 10px 0 0 auto;
+    cursor: pointer;
+}
+
+#backToMainPage:hover {
+    color: #FFCA03;
+}
+
+
+.target-btn-container {
+    display: flex;
+}
 
 
 .targetButton {
@@ -128,10 +147,21 @@ body {
 }
 
 
+
+
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
     30% { transform: translate(3px, 2px) rotate(0deg); }
     60% { transform: translate(-3px, 1px) rotate(0deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  @keyframes growup {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
   }
