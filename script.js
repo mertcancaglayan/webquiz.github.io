@@ -35,14 +35,12 @@ function startQuiz(Questions) {
 }
 
 function showNextQuestion() {
-	if (
-		currentQuestionIndex >= 0 &&
-		currentQuestionIndex < currentQuestionSet.length
-	) {
+	if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuestionSet.length) {
 		let currentQuestion = currentQuestionSet[currentQuestionIndex];
 		let questionNo = currentQuestionIndex + 1;
 
 		questionElement.innerText = `Question(${questionNo}) ${currentQuestion.question}`;
+
 		scoreElement.innerHTML = `Score: ${score}/${currentQuestionSet.length}`;
 
 		answerButtonElement.innerHTML = "";
@@ -58,10 +56,7 @@ function showNextQuestion() {
 
 			buttonElement.innerText = answer.text;
 
-			if (
-				selectedAnswers[questionNo] &&
-				selectedAnswers[questionNo].text === answer.text
-			) {
+			if (selectedAnswers[questionNo] && selectedAnswers[questionNo].text === answer.text) {
 				buttonElement.classList.add("greyBackground");
 				buttonElement.disabled = true;
 			}
@@ -133,6 +128,7 @@ function endQuiz() {
 	scoreElement.style.justifyContent = "space-between";
 	answerButtonElement.innerHTML = "";
 	questionElement.innerText = "";
+
 	previousBtnElement.style.display = "none";
 
 	const mainPageButtonElement = document.getElementById("mainPage");
