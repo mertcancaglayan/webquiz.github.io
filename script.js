@@ -25,7 +25,7 @@ backToMainPageElement.addEventListener("click", () => {
 let currentQuestionIndex = 0;
 let score = 0;
 let currentQuestionSet = [];
-const selectedAnswers = {};
+let selectedAnswers = {};
 
 function startQuiz(Questions) {
 	currentQuestionSet = Questions;
@@ -143,6 +143,7 @@ function endQuiz() {
 		scoreElement.innerHTML = "";
 		mainPageButtonElement.style.display = "none";
 		scoreElement.style.justifyContent = "center";
+		selectedAnswers = {};
 		startQuiz(currentQuestionSet);
 	});
 
@@ -166,7 +167,7 @@ simultaneousButton.addEventListener("click", () => {
 });
 
 const shakeBtn = document.getElementById("shake-btn");
-shakeBtn.addEventListener("click", function () {
+shakeBtn.addEventListener("click", () => {
 	if (shakeBtn.classList.contains("shake")) {
 		shakeBtn.classList.remove("shake");
 	} else {
